@@ -50,8 +50,8 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.PK }}
-      - name: SCP transfer
-        run: scp *.jar ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }}:~/cicd
+      # - name: SCP transfer
+        # run: scp *.jar ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }}:~/cicd
       - name: Execute remote commands
         run: |
           ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }} "fuser -k 8080/tcp"
