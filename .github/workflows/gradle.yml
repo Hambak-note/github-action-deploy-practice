@@ -49,7 +49,7 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.4
         with:
-          ssh-private-key: ${{ secrets.pk }}
+          ssh-private-key: ${{ secrets.PK }}
       - name: SCP transfer
         run: scp *.jar ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }}:~/cicd
       - name: Execute remote commands
