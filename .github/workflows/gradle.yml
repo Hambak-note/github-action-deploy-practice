@@ -56,6 +56,9 @@ jobs:
           script: | 
             cd /home/ubuntu/repo/github-action-deploy-practice
             git pull origin main
+            build gradle #gradle build
+            # fuser -k 8080/tcp # 8080포트로 동작하는 서버 kill
+            
 
       # - name: Setup SSH
       #   uses: webfactory/ssh-agent@v0.5.4
