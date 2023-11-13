@@ -54,8 +54,8 @@ jobs:
           key: ${{ secrets.AWS_EC2_PRIVATE_KEY }} 
           port: ${{ secrets.AWS_EC2_PORT }} 
           script: | 
-            cd /home/ubuntu
-            mkdir test1
+            cd /home/ubuntu/repo/github-action-deploy-practice
+            git pull origin main
 
       # - name: Setup SSH
       #   uses: webfactory/ssh-agent@v0.5.4
