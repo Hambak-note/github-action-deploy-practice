@@ -29,6 +29,7 @@ jobs:
           port: ${{ secrets.AWS_EC2_PORT }} 
           script: | 
             cd /home/ubuntu/repo/github-action-deploy-practice
+            git checkout main
             git pull origin main
             /opt/gradle/gradle-8.2.1/bin/gradle build #gradle build
             if lsof -Pi :$8080 -sTCP:LISTEN -t >/dev/null; then
