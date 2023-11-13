@@ -38,4 +38,7 @@ jobs:
             else
               echo "8080 포트는 사용 중이지 않습니다."
             fi
-            nohup java -jar ./build/libs/*.jar &
+            current_date=$(date +"%Y%m%d")
+            log_directory="/home/ubuntu/logs/runnerpia"
+            nohup java -jar ./build/libs/*.jar >> "$log_directory/runnerpia_$current_date.log" 2>&1 &
+
