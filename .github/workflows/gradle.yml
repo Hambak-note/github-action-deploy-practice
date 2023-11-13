@@ -29,15 +29,14 @@ jobs:
           port: ${{ secrets.AWS_EC2_PORT }} 
           script: | 
             cd /home/ubuntu/repo/github-action-deploy-practice
+            git checkout main
             git pull origin main
-            /opt/gradle/gradle-8.2.1/bin/gradle build #gradle build
+            /opt/gradle/gradle-8.2.1/bin/gradle build 
             if lsof -Pi :$8080 -sTCP:LISTEN -t >/dev/null; then
               echo "8080 포트가 사용 중입니다. 프로세스를 종료합니다."
               sudo fuser -k $8080/tcp
             else
               echo "8080 포트는 사용 중이지 않습니다."
             fi
-            current_date=$(date +"%Y%m%d")
-            log_directory="/home/ubuntu/logs/runnerpia"
-            nohup java -jar ./build/libs/*.jar >> "$log_directory/runnerpia_$current_date.log" 2>&1 &
+            nohup java -jar ./build/libs/*.jar >> "../../logs/runnerpia_$current_date.log" 2>&1 &
 
