@@ -46,13 +46,24 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: cicdsample
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.4
+      - name: excuting remote ssh commands
+        uses: appleboy/ssh-action@v0.1.6
         with:
-          ssh-private-key: ${{ secrets.PK }}
-      # - name: SCP transfer
-        # run: scp *.jar ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }}:~/cicd
-      - name: Execute remote commands
-        run: |
-          ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }} "fuser -k 8080/tcp"
-          ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }} "nohup java -jar ~/cicd/*.jar &"
+          host: ${{ secrets.AWS_EC2_IP }} 
+          username: ${{ secrets.AWS_EC2_USER }} 
+          key: ${{ secrets.AWS_EC2_PRIVATE_KEY }} 
+          port: ${{ secrets.AWS_EC2_PORT }} 
+          script: | 
+            cd /home/ubuntu
+            mkdir test1
+
+      # - name: Setup SSH
+      #   uses: webfactory/ssh-agent@v0.5.4
+      #   with:
+      #     ssh-private-key: ${{ secrets.PK }}
+      # # - name: SCP transfer
+      #   # run: scp *.jar ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }}:~/cicd
+      # - name: Execute remote commands
+      #   run: |
+      #     ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }} "fuser -k 8080/tcp"
+      #     ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_IP }} "nohup java -jar ~/cicd/*.jar &"
