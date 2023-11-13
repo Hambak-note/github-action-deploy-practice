@@ -52,7 +52,7 @@ jobs:
             cd /home/ubuntu/repo/github-action-deploy-practice
             git pull origin main
             /opt/gradle/gradle-8.2.1/bin/gradle build #gradle build
-            fuser -k 8080/tcp # fuser -k 8080/tcp # 8080포트로 동작하는 서버 kill
+            sudo fuser -k 8080/tcp # fuser -k 8080/tcp # 8080포트로 동작하는 서버 kill
             #프로젝트 실행
             
 
