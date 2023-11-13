@@ -52,8 +52,12 @@ jobs:
             cd /home/ubuntu/repo/github-action-deploy-practice
             git pull origin main
             /opt/gradle/gradle-8.2.1/bin/gradle build #gradle build
-            fuser -k 8080/tcp # fuser -k 8080/tcp # 8080포트로 동작하는 서버 kill
-            #프로젝트 실행
+            if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null; then
+              echo "8080 포트가 사용 중입니다. 프로세스를 종료합니다."
+              sudo fuser -k $PORT/tcp
+            else
+              echo "8080 포트는 사용 중이지 않습니다."
+            fi
             
 
       # - name: Setup SSH
